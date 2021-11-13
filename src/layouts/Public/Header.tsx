@@ -15,7 +15,7 @@ import { HiMenu } from "react-icons/hi";
 import { NavLink } from "react-router-dom";
 import { publicLinks } from "../../common/links";
 
-const Header = () => {
+const Header = ({ toggleMenu }: { toggleMenu: () => void }) => {
   return (
     <Flex as="header" justify="space-between" p={5}>
       <IconButton
@@ -25,6 +25,7 @@ const Header = () => {
         icon={<HiMenu />}
         display={{ base: "flex", lg: "none" }}
         _focus={{}}
+        onClick={toggleMenu}
       />
 
       <Stack direction="row" align="center">
@@ -34,15 +35,14 @@ const Header = () => {
       </Stack>
 
       <Box as="nav" display={{ base: "none", lg: "flex" }}>
-        <UnorderedList listStyleType="none" display="flex" gridGap={5}>
+        <UnorderedList listStyleType="none" display="flex" gridGap={5} m={0}>
           {publicLinks.map((link) => (
-            <ListItem>
+            <ListItem key={link.key}>
               <Button
                 as={NavLink}
-                key={link.key}
                 to={link.to}
                 variant="ghost"
-                px="10"
+                px={10}
                 _focus={{}}
                 // @ts-ignore
                 style={({ isActive }: { isActive: boolean }) => ({
@@ -68,6 +68,7 @@ const Header = () => {
         aria-label="Login"
         icon={<AiOutlineHome />}
         display={{ base: "flex", lg: "none" }}
+        _focus={{}}
       />
     </Flex>
   );
