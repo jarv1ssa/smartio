@@ -1,4 +1,3 @@
-import React from "react";
 import {
   User,
   createUserWithEmailAndPassword,
@@ -7,6 +6,7 @@ import {
   updateProfile,
 } from "@firebase/auth";
 import { auth, db } from "../firebase";
+import { createContext, useEffect, useState } from "react";
 import { doc, setDoc } from "@firebase/firestore";
 
 type AuthContextType = {
@@ -20,15 +20,15 @@ type AuthContextType = {
   login: (email: string, password: string) => Promise<void>;
 };
 
-export const AuthContext = React.createContext<AuthContextType | null>(null);
+export const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthContextProvider = ({
   children,
 }: React.PropsWithChildren<{}>) => {
-  const [user, setUser] = React.useState<User | null>(null);
-  const [loading, setLoading] = React.useState(true);
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
       setLoading(false);
@@ -55,7 +55,7 @@ export const AuthContextProvider = ({
   const login = async (email: string, password: string) => {
     try {
       const res = await signInWithEmailAndPassword(auth, email, password);
-      
+
       setUser(res.user);
     } catch (err) {
       throw err;

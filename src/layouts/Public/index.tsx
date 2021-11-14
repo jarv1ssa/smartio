@@ -1,7 +1,7 @@
 import Header from "./Header";
 import NavDrawer from "./NavDrawer";
-import { Fragment, PropsWithChildren } from "react";
 import { Box, useDisclosure } from "@chakra-ui/react";
+import { Fragment, PropsWithChildren } from "react";
 
 const Public = ({ children }: PropsWithChildren<{}>) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
