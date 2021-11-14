@@ -1,5 +1,11 @@
+import { GridItem } from "@chakra-ui/react";
+
 const Header = () => {
-  return <p>header</p>;
+  return (
+    <GridItem as="header" gridArea="header" bgColor="blue.500">
+      header
+    </GridItem>
+  );
 };
 
 export default Header;
