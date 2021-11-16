@@ -1,8 +1,20 @@
 import GooglePayButton from "@google-pay/button-react";
+import Signup from "../Signup";
 import hero from "../../../assets/images/hero.svg";
-import { Center, Heading, Image, Stack, Text } from "@chakra-ui/react";
+import {
+  Center,
+  Heading,
+  Image,
+  Stack,
+  Text,
+  useDisclosure,
+} from "@chakra-ui/react";
+import { useState } from "react";
 
 const Hero = () => {
+  const [email, setEmail] = useState("");
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <Center
       flexDirection={{ base: "column", lg: "row" }}
@@ -67,7 +79,8 @@ const Hero = () => {
             emailRequired: true,
           }}
           onLoadPaymentData={async ({ email }) => {
-            console.log(email);
+            setEmail(email || "");
+            onOpen();
           }}
         />
       </Stack>
@@ -76,6 +89,8 @@ const Hero = () => {
         boxSize={{ base: "90%", sm: "70%", md: "50%", lg: "40%" }}
         src={hero}
       />
+
+      <Signup email={email} modalProps={{ isOpen, onClose }} />
     </Center>
   );
 };
