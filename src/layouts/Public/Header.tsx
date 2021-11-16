@@ -10,12 +10,16 @@ import {
   Stack,
   Text,
   UnorderedList,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { HiMenu } from "react-icons/hi";
 import { NavLink } from "react-router-dom";
 import { publicLinks } from "../../common/links";
+import Login from "../../components/Public/Login";
 
 const Header = ({ toggleMenu }: { toggleMenu: () => void }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <Flex as="header" justify="space-between" p={5}>
       <IconButton
@@ -58,7 +62,12 @@ const Header = ({ toggleMenu }: { toggleMenu: () => void }) => {
         </UnorderedList>
       </Box>
 
-      <Button variant="smart" display={{ base: "none", lg: "flex" }} px={10}>
+      <Button
+        variant="smart"
+        display={{ base: "none", lg: "flex" }}
+        px={10}
+        onClick={onOpen}
+      >
         Login
       </Button>
 
@@ -70,6 +79,8 @@ const Header = ({ toggleMenu }: { toggleMenu: () => void }) => {
         display={{ base: "flex", lg: "none" }}
         _focus={{}}
       />
+
+      <Login isOpen={isOpen} onClose={onClose} />
     </Flex>
   );
 };
