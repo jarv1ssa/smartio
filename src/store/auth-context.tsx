@@ -5,9 +5,8 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from "@firebase/auth";
-import { auth, db } from "../firebase";
+import { auth } from "../firebase";
 import { createContext, useEffect, useState } from "react";
-import { doc, setDoc } from "@firebase/firestore";
 
 type AuthContextType = {
   user: User | null;
@@ -44,7 +43,6 @@ export const AuthContextProvider = ({
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
       await updateProfile(res.user, { displayName });
-      await setDoc(doc(db, "users", res.user.uid), { displayName, email });
 
       setUser(res.user);
     } catch (err) {

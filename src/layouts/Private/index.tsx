@@ -1,14 +1,25 @@
 import Aside from "./Aside";
 import Header from "./Header";
+import Loading from "../../components/ui/Loading";
 import NavDrawer from "./NavDrawer";
 import Sidebar from "./Sidebar";
 import { Grid, GridItem, useDisclosure } from "@chakra-ui/react";
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useEffect } from "react";
+import { useAuth } from "../../hooks/useAuth";
+import { useNavigate } from "react-router";
 
 const Private = ({ children }: PropsWithChildren<{}>) => {
   const { isOpen, onClose } = useDisclosure();
+  const { user, loading } = useAuth();
+  const navigate = useNavigate();
 
-  return (
+  useEffect(() => {
+    if (!user && !loading) {
+      navigate("/");
+    }
+  }, [user, loading, navigate]);
+
+  return user ? (
     <Grid
       templateRows="auto 4fr"
       templateColumns="auto 3fr 1fr"
@@ -29,6 +40,8 @@ const Private = ({ children }: PropsWithChildren<{}>) => {
 
       <Aside />
     </Grid>
+  ) : (
+    <Loading />
   );
 };
 

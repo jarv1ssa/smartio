@@ -14,11 +14,14 @@ import {
   ModalHeader,
   ModalOverlay,
   ModalProps,
+  useToast,
 } from "@chakra-ui/react";
 import { FaEnvelope } from "react-icons/fa";
 import { Form, Formik } from "formik";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import { IoIosKeypad } from "react-icons/io";
+import { useAuth } from "../../../hooks/useAuth";
+import { useNavigate } from "react-router";
 import { useState } from "react";
 
 const LoginSchema = Yup.object().shape({
@@ -36,6 +39,10 @@ const LoginSchema = Yup.object().shape({
 
 const Login = (props: Omit<ModalProps, "children">) => {
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  const toast = useToast();
 
   return (
     <Modal isCentered {...props}>
@@ -52,7 +59,23 @@ const Login = (props: Omit<ModalProps, "children">) => {
             }}
             validationSchema={LoginSchema}
             onSubmit={async (values, { resetForm }) => {
-              console.log(values);
+              try {
+                setLoading(true);
+                await login!(values.email, values.password);
+                navigate("/dashboard");
+              } catch (err) {
+                toast({
+                  title: "Error",
+                  description: "Invalid user credentials",
+                  status: "error",
+                  position: "top-right",
+                  duration: 3000,
+                  isClosable: true,
+                });
+
+                setLoading(false);
+                resetForm();
+              }
             }}
           >
             {(props) => (
@@ -120,6 +143,7 @@ const Login = (props: Omit<ModalProps, "children">) => {
             type="submit"
             form="login"
             isFullWidth
+            isLoading={loading}
             bgColor="pink.500"
             _hover={{
               bgColor: "pink.600",

@@ -14,11 +14,14 @@ import {
   ModalHeader,
   ModalOverlay,
   ModalProps,
+  useToast,
 } from "@chakra-ui/react";
 import { FaEnvelope } from "react-icons/fa";
 import { Form, Formik } from "formik";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import { IoIosKeypad } from "react-icons/io";
+import { useAuth } from "../../../hooks/useAuth";
+import { useNavigate } from "react-router";
 import { useState } from "react";
 
 type SignupProps = {
@@ -48,15 +51,17 @@ const SignupSchema = Yup.object().shape({
 
 const Signup = ({ email, modalProps }: SignupProps) => {
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const { signup } = useAuth();
+  const navigate = useNavigate();
+  const toast = useToast();
 
   return (
     <Modal isCentered {...modalProps}>
       <ModalOverlay />
 
       <ModalContent>
-        <ModalHeader textAlign="center">
-          Transaction succeeded!
-        </ModalHeader>
+        <ModalHeader textAlign="center">Transaction succeeded!</ModalHeader>
 
         <ModalBody>
           <Formik
@@ -67,7 +72,27 @@ const Signup = ({ email, modalProps }: SignupProps) => {
             }}
             validationSchema={SignupSchema}
             onSubmit={async (values, { resetForm }) => {
-              console.log(values);
+              try {
+                setLoading(true);
+                await signup!(
+                  values.displayName,
+                  values.email,
+                  values.password
+                );
+                navigate("/dashboard");
+              } catch (err) {
+                toast({
+                  title: "Error",
+                  description: "An error occurred",
+                  status: "error",
+                  position: "top-right",
+                  duration: 3000,
+                  isClosable: true,
+                });
+
+                setLoading(false);
+                resetForm();
+              }
             }}
           >
             {(props) => (
@@ -162,6 +187,7 @@ const Signup = ({ email, modalProps }: SignupProps) => {
             type="submit"
             form="login"
             isFullWidth
+            isLoading={loading}
             bgColor="pink.500"
             _hover={{
               bgColor: "pink.600",
