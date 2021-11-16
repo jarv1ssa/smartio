@@ -16,9 +16,13 @@ import { HiMenu } from "react-icons/hi";
 import { NavLink } from "react-router-dom";
 import { publicLinks } from "../../common/links";
 import Login from "../../components/Public/Login";
+import { useAuth } from "../../hooks/useAuth";
+import { useNavigate } from "react-router";
 
 const Header = ({ toggleMenu }: { toggleMenu: () => void }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <Flex as="header" justify="space-between" p={5}>
@@ -62,23 +66,27 @@ const Header = ({ toggleMenu }: { toggleMenu: () => void }) => {
         </UnorderedList>
       </Box>
 
-      <Button
-        variant="smart"
-        display={{ base: "none", lg: "flex" }}
-        px={10}
-        onClick={onOpen}
-      >
-        Login
-      </Button>
+      {!user && (
+        <Button
+          variant="smart"
+          display={{ base: "none", lg: "flex" }}
+          px={10}
+          onClick={onOpen}
+        >
+          Login
+        </Button>
+      )}
 
-      <IconButton
-        variant="ghost"
-        size="lg"
-        aria-label="Login"
-        icon={<AiOutlineHome />}
-        display={{ base: "flex", lg: "none" }}
-        _focus={{}}
-      />
+      {user && (
+        <IconButton
+          variant="ghost"
+          size="lg"
+          aria-label={user ? "Go home" : "Login"}
+          icon={<AiOutlineHome />}
+          _focus={{}}
+          onClick={user ? () => navigate("/dashboard") : onOpen}
+        />
+      )}
 
       <Login isOpen={isOpen} onClose={onClose} />
     </Flex>
