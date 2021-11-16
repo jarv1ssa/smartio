@@ -39,7 +39,7 @@ const Header = ({ toggleMenu }: { toggleMenu: () => void }) => {
       <Stack direction="row" align="center">
         <Image src={logo} boxSize={8} />
 
-        <Text fontWeight="bold">SmartIO</Text>
+        <Text fontSize="lg" fontWeight="bold">SmartIO</Text>
       </Stack>
 
       <Box as="nav" display={{ base: "none", lg: "flex" }}>

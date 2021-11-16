@@ -1,5 +1,5 @@
 import { HiHome } from "react-icons/hi";
-import { IoMdNotifications, IoMdSettings } from "react-icons/io";
+import { MdDevices, MdSettings } from "react-icons/md";
 
 export const publicLinks = [
   { key: "home", title: "Home", to: "/" },
@@ -9,15 +9,15 @@ export const publicLinks = [
 export const privateLinks = [
   { key: "dashboard", title: "Dashboard", to: "/dashboard", icon: HiHome },
   {
-    key: "notifications",
-    title: "Notifications",
-    to: "/notifications",
-    icon: IoMdNotifications,
+    key: "devices",
+    title: "Devices",
+    to: "/devices",
+    icon: MdDevices,
   },
   {
     key: "settings",
     title: "Settings",
     to: "/settings",
-    icon: IoMdSettings,
+    icon: MdSettings,
   },
 ];
