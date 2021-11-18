@@ -25,7 +25,7 @@ const Private = ({ children }: PropsWithChildren<{}>) => {
       templateColumns="auto 3fr 1fr"
       templateAreas={{
         base: "'header header header' 'main main main' 'aside aside aside'",
-        lg: "'sidebar header aside' 'sidebar main aside'",
+        xl: "'sidebar header aside' 'sidebar main aside'",
       }}
     >
       <Sidebar />
