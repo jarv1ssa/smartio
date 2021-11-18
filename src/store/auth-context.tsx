@@ -43,7 +43,6 @@ export const AuthContextProvider = ({
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
       await updateProfile(res.user, { displayName });
-
       setUser(res.user);
     } catch (err) {
       throw err;
@@ -53,7 +52,6 @@ export const AuthContextProvider = ({
   const login = async (email: string, password: string) => {
     try {
       const res = await signInWithEmailAndPassword(auth, email, password);
-
       setUser(res.user);
     } catch (err) {
       throw err;

@@ -10,6 +10,7 @@ import { useNavigate } from "react-router";
 
 const Private = ({ children }: PropsWithChildren<{}>) => {
   const { isOpen, onClose } = useDisclosure();
+
   const { user, loading } = useAuth();
   const navigate = useNavigate();
 

@@ -1,5 +1,5 @@
+import Login from "../../components/Public/Login";
 import logo from "../../assets/images/logo.png";
-import { AiOutlineHome } from "react-icons/ai";
 import {
   Box,
   Button,
@@ -15,14 +15,12 @@ import {
 import { HiMenu } from "react-icons/hi";
 import { NavLink } from "react-router-dom";
 import { publicLinks } from "../../common/links";
-import Login from "../../components/Public/Login";
 import { useAuth } from "../../hooks/useAuth";
-import { useNavigate } from "react-router";
 
 const Header = ({ toggleMenu }: { toggleMenu: () => void }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   const { user } = useAuth();
-  const navigate = useNavigate();
 
   return (
     <Flex as="header" justify="space-between" p={5}>
@@ -36,10 +34,12 @@ const Header = ({ toggleMenu }: { toggleMenu: () => void }) => {
         onClick={toggleMenu}
       />
 
-      <Stack direction="row" align="center">
+      <Stack direction="row" align="center" mr={{ base: "auto", lg: 0 }}>
         <Image src={logo} boxSize={8} />
 
-        <Text fontSize="lg" fontWeight="bold">SmartIO</Text>
+        <Text fontSize="lg" fontWeight="bold">
+          SmartIO
+        </Text>
       </Stack>
 
       <Box as="nav" display={{ base: "none", lg: "flex" }}>
@@ -75,17 +75,6 @@ const Header = ({ toggleMenu }: { toggleMenu: () => void }) => {
         >
           Login
         </Button>
-      )}
-
-      {user && (
-        <IconButton
-          variant="ghost"
-          size="lg"
-          aria-label={user ? "Go home" : "Login"}
-          icon={<AiOutlineHome />}
-          _focus={{}}
-          onClick={user ? () => navigate("/dashboard") : onOpen}
-        />
       )}
 
       <Login isOpen={isOpen} onClose={onClose} />

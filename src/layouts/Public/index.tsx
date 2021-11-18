@@ -1,12 +1,13 @@
 import Header from "./Header";
+import Loading from "../../components/ui/Loading";
 import NavDrawer from "./NavDrawer";
 import { Box, useDisclosure } from "@chakra-ui/react";
 import { Fragment, PropsWithChildren } from "react";
 import { useAuth } from "../../hooks/useAuth";
-import Loading from "../../components/ui/Loading";
 
 const Public = ({ children }: PropsWithChildren<{}>) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   const { loading } = useAuth();
 
   return !loading ? (

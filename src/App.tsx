@@ -1,12 +1,12 @@
 import About from "./pages/About";
 import Dashboard from "./pages/Dashboard";
+import Devices from "./pages/Devices";
 import Home from "./pages/Home";
+import Settings from "./pages/Settings";
 import theme from "./theme";
 import { AuthContextProvider } from "./store/auth-context";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Route, Routes } from "react-router-dom";
-import Devices from "./pages/Devices";
-import Settings from "./pages/Settings";
 
 function App() {
   return (

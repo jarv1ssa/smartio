@@ -40,6 +40,7 @@ const LoginSchema = Yup.object().shape({
 const Login = (props: Omit<ModalProps, "children">) => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+
   const { login } = useAuth();
   const navigate = useNavigate();
   const toast = useToast();
@@ -58,10 +59,10 @@ const Login = (props: Omit<ModalProps, "children">) => {
               password: "",
             }}
             validationSchema={LoginSchema}
-            onSubmit={async (values, { resetForm }) => {
+            onSubmit={async ({ email, password }, { resetForm }) => {
               try {
                 setLoading(true);
-                await login!(values.email, values.password);
+                await login!(email, password);
                 navigate("/dashboard");
               } catch (err) {
                 toast({
@@ -142,14 +143,9 @@ const Login = (props: Omit<ModalProps, "children">) => {
           <Button
             type="submit"
             form="login"
+            variant="smart"
             isFullWidth
             isLoading={loading}
-            bgColor="pink.500"
-            _hover={{
-              bgColor: "pink.600",
-            }}
-            _focus={{ bgColor: "pink.600" }}
-            _active={{ bgColor: "pink.600" }}
           >
             Login
           </Button>

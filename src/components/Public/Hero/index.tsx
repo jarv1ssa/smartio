@@ -2,6 +2,7 @@ import GooglePayButton from "@google-pay/button-react";
 import Signup from "../Signup";
 import hero from "../../../assets/images/hero.svg";
 import {
+  Button,
   Center,
   Heading,
   Image,
@@ -9,11 +10,16 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
+import { useAuth } from "../../../hooks/useAuth";
+import { useNavigate } from "react-router";
 import { useState } from "react";
 
 const Hero = () => {
   const [email, setEmail] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <Center
@@ -42,47 +48,55 @@ const Hero = () => {
           </Text>
         </Stack>
 
-        <GooglePayButton
-          buttonColor="white"
-          buttonSizeMode="fill"
-          environment="TEST"
-          paymentRequest={{
-            apiVersion: 2,
-            apiVersionMinor: 0,
-            allowedPaymentMethods: [
-              {
-                type: "CARD",
-                parameters: {
-                  allowedAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
-                  allowedCardNetworks: ["VISA", "MASTERCARD"],
-                },
-                tokenizationSpecification: {
-                  type: "PAYMENT_GATEWAY",
+        {!user && (
+          <GooglePayButton
+            buttonColor="white"
+            buttonSizeMode="fill"
+            environment="TEST"
+            paymentRequest={{
+              apiVersion: 2,
+              apiVersionMinor: 0,
+              allowedPaymentMethods: [
+                {
+                  type: "CARD",
                   parameters: {
-                    gateway: "example",
-                    gatewayMerchantId: "exampleGatewayMerchantId",
+                    allowedAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
+                    allowedCardNetworks: ["VISA", "MASTERCARD"],
+                  },
+                  tokenizationSpecification: {
+                    type: "PAYMENT_GATEWAY",
+                    parameters: {
+                      gateway: "example",
+                      gatewayMerchantId: "exampleGatewayMerchantId",
+                    },
                   },
                 },
+              ],
+              merchantInfo: {
+                merchantId: "00000000-0000-0000-0000-000000000000",
+                merchantName: "SmartIO",
               },
-            ],
-            merchantInfo: {
-              merchantId: "00000000-0000-0000-0000-000000000000",
-              merchantName: "SmartIO",
-            },
-            transactionInfo: {
-              totalPrice: "0",
-              totalPriceStatus: "FINAL",
-              totalPriceLabel: "Total",
-              currencyCode: "USD",
-              countryCode: "US",
-            },
-            emailRequired: true,
-          }}
-          onLoadPaymentData={async ({ email }) => {
-            setEmail(email || "");
-            onOpen();
-          }}
-        />
+              transactionInfo: {
+                totalPrice: "0",
+                totalPriceStatus: "FINAL",
+                totalPriceLabel: "Total",
+                currencyCode: "USD",
+                countryCode: "US",
+              },
+              emailRequired: true,
+            }}
+            onLoadPaymentData={async ({ email }) => {
+              setEmail(email || "");
+              onOpen();
+            }}
+          />
+        )}
+
+        {user && (
+          <Button variant="smart" onClick={() => navigate("/dashboard ")}>
+            Go Home
+          </Button>
+        )}
       </Stack>
 
       <Image

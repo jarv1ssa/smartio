@@ -52,6 +52,7 @@ const SignupSchema = Yup.object().shape({
 const Signup = ({ email, modalProps }: SignupProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+
   const { signup } = useAuth();
   const navigate = useNavigate();
   const toast = useToast();
@@ -71,14 +72,13 @@ const Signup = ({ email, modalProps }: SignupProps) => {
               password: "",
             }}
             validationSchema={SignupSchema}
-            onSubmit={async (values, { resetForm }) => {
+            onSubmit={async (
+              { displayName, email, password },
+              { resetForm }
+            ) => {
               try {
                 setLoading(true);
-                await signup!(
-                  values.displayName,
-                  values.email,
-                  values.password
-                );
+                await signup!(displayName, email, password);
                 navigate("/dashboard");
               } catch (err) {
                 toast({
@@ -186,14 +186,9 @@ const Signup = ({ email, modalProps }: SignupProps) => {
           <Button
             type="submit"
             form="login"
+            variant="smart"
             isFullWidth
             isLoading={loading}
-            bgColor="pink.500"
-            _hover={{
-              bgColor: "pink.600",
-            }}
-            _focus={{ bgColor: "pink.600" }}
-            _active={{ bgColor: "pink.600" }}
           >
             Continue
           </Button>
