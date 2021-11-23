@@ -100,8 +100,8 @@ const Hero = () => {
       </Stack>
 
       <Image
-        boxSize={{ base: "90%", sm: "70%", md: "50%", lg: "40%" }}
         src={hero}
+        boxSize={{ base: "90%", sm: "70%", md: "50%", lg: "40%" }}
       />
 
       <Signup email={email} modalProps={{ isOpen, onClose }} />

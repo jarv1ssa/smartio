@@ -16,7 +16,7 @@ import { privateLinks } from "../../common/links";
 
 const NavDrawer = (props: Omit<DrawerProps, "children">) => {
   return (
-    <Drawer size="full" {...props}>
+    <Drawer size="full" placement="left" {...props}>
       <DrawerOverlay />
 
       <DrawerContent>

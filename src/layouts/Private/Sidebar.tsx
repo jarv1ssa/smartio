@@ -14,7 +14,7 @@ const Sidebar = () => {
       as="nav"
       gridArea="sidebar"
       minH="100vh"
-      display={{ base: "none", lg: "flex" }}
+      display={{ base: "none", xl: "flex" }}
       alignItems="center"
       px={2}
     >
