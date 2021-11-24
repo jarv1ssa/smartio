@@ -95,7 +95,7 @@ const Aside = () => {
         direction={{ base: "column", "2xl": "row" }}
         justify={{ "2xl": "space-between" }}
         align={{ "2xl": "center" }}
-        mb={8}
+        mb={16}
       >
         <Stack direction="row" spacing={4}>
           <Image
