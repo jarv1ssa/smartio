@@ -38,7 +38,7 @@ const Header = ({ toggleMenu }: { toggleMenu: () => void }) => {
         onClick={toggleMenu}
       />
 
-      <Text my={2} fontSize="4xl" textAlign="center">
+      <Text my={2} fontSize="4xl" fontWeight="bold" textAlign="center">
         {user?.displayName + "'s home"}
       </Text>
 

@@ -23,13 +23,19 @@ const Header = ({ toggleMenu }: { toggleMenu: () => void }) => {
   const { user } = useAuth();
 
   return (
-    <Flex as="header" justify="space-between" p={5}>
+    <Flex
+      as="header"
+      justify="space-between"
+      px={{ base: 2, lg: 8 }}
+      py={{ base: 4, lg: 8 }}
+    >
       <IconButton
         variant="ghost"
         size="lg"
         aria-label="Toggle menu"
         icon={<HiMenu />}
         display={{ base: "flex", lg: "none" }}
+        mr={2}
         _focus={{}}
         onClick={toggleMenu}
       />

@@ -9,7 +9,7 @@ const Dashboard = () => {
   return (
     <Private>
       <Tabs colorScheme="pink">
-        <TabList>
+        <TabList mx={8}>
           <Tab _focus={{}}>Living room</Tab>
           <Tab _focus={{}}>Bedroom</Tab>
           <Tab _focus={{}}>Bathroom</Tab>
