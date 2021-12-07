@@ -24,7 +24,7 @@ const Header = ({ toggleMenu }: { toggleMenu: () => void }) => {
       display="grid"
       placeItems={{ base: "center", xl: "flex-start" }}
       px={5}
-      pt={5}
+      pt={{ base: 5, xl: 10 }}
       pb={10}
     >
       <IconButton

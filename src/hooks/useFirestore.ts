@@ -1,11 +1,13 @@
-import { addDoc, collection, doc, setDoc } from "@firebase/firestore";
+import { ActionType } from "../shared/types/firestore.type";
+import {
+  addDoc,
+  collection,
+  doc,
+  setDoc,
+  updateDoc,
+} from "@firebase/firestore";
 import { firestore } from "../firebase";
 import { useReducer } from "react";
-
-type ActionType =
-  | { type: "data"; payload: any }
-  | { type: "error"; payload: any }
-  | { type: "loading"; payload?: boolean };
 
 const initialState = {
   data: null,
@@ -23,7 +25,7 @@ const reducer = (state: typeof initialState, action: ActionType) => {
       return {
         data: state.data,
         error: state.error,
-        loading: action.payload || !state.loading,
+        loading: action.payload,
       };
     default:
       return state;
@@ -52,7 +54,7 @@ export const useFirestore = (collectionName: string) => {
     dispatch({ type: "loading", payload: true });
 
     try {
-      const res = await setDoc(doc(firestore, id), document);
+      const res = await setDoc(doc(ref, id), document);
       dispatch({ type: "data", payload: res });
     } catch (err) {
       dispatch({ type: "error", payload: err });
@@ -61,5 +63,19 @@ export const useFirestore = (collectionName: string) => {
     }
   };
 
-  return { add, set, ...state };
+  const update = async (id: string, document: any) => {
+    dispatch({ type: "loading", payload: true });
+
+    try {
+      await updateDoc(doc(ref, id), document);
+      dispatch({ type: "data", payload: "ok" });
+    } catch (err) {
+      console.log(err);
+      dispatch({ type: "error", payload: err });
+    } finally {
+      dispatch({ type: "loading", payload: false });
+    }
+  };
+
+  return { add, set, update, ...state };
 };

@@ -31,6 +31,7 @@ const Private = ({ children }: PropsWithChildren<{}>) => {
         base: "'header header header' 'main main main' 'aside aside aside'",
         xl: "'sidebar header aside' 'sidebar main aside'",
       }}
+      gap={{ xl: 4 }}
     >
       <Sidebar />
 

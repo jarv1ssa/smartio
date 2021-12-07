@@ -8,6 +8,19 @@ const config: ThemeConfig = {
 
 const theme = extendTheme({
   config,
+  colors: {
+    smart: {
+      100: "#d53f8c",
+      200: "#d53f8c",
+      300: "#d53f8c",
+      400: "#d53f8c",
+      500: "#d53f8c",
+      600: "#d53f8c",
+      700: "#d53f8c",
+      800: "#d53f8c",
+      900: "#d53f8c",
+    },
+  },
   fonts: {
     heading: "DM Sans",
     body: "DM Sans",

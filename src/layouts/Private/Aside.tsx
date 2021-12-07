@@ -27,7 +27,7 @@ const Aside = () => {
   }, []);
 
   return current && forecast ? (
-    <GridItem as="aside" gridArea="aside" px={10} py={16}>
+    <GridItem as="aside" gridArea="aside" px={10} py={{ xl: 16 }}>
       <Text mb={8} fontSize="4xl" textAlign="center">
         {current.condition.text}
       </Text>

@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { HiMenu } from "react-icons/hi";
 import { NavLink } from "react-router-dom";
-import { publicLinks } from "../../common/links";
+import { publicLinks } from "../../shared/other/links";
 import { useAuth } from "../../hooks/useAuth";
 
 const Header = ({ toggleMenu }: { toggleMenu: () => void }) => {

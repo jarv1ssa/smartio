@@ -16,20 +16,20 @@ const Dashboard = () => {
           <Tab _focus={{}}>Kitchen</Tab>
         </TabList>
 
-        <TabPanels>
-          <TabPanel>
+        <TabPanels p={{ base: 8, xl: 0 }}>
+          <TabPanel mt={{ xl: 4 }} borderRadius="3xl" bgColor="gray.700">
             <Livingroom />
           </TabPanel>
 
-          <TabPanel>
+          <TabPanel mt={4} borderRadius="3xl" bgColor="gray.700">
             <Bedroom />
           </TabPanel>
 
-          <TabPanel>
+          <TabPanel mt={4} borderRadius="3xl" bgColor="gray.700">
             <Bathroom />
           </TabPanel>
 
-          <TabPanel>
+          <TabPanel mt={4} borderRadius="3xl" bgColor="gray.700">
             <Kitchen />
           </TabPanel>
         </TabPanels>

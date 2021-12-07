@@ -11,7 +11,7 @@ import {
   UnorderedList,
 } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
-import { publicLinks } from "../../common/links";
+import { publicLinks } from "../../shared/other/links";
 
 const NavDrawer = (props: Omit<DrawerProps, "children">) => {
   return (
