@@ -3,6 +3,7 @@ import {
   Button,
   GridItem,
   IconButton,
+  Stack,
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -22,28 +23,48 @@ const Header = ({ toggleMenu }: { toggleMenu: () => void }) => {
       as="header"
       gridArea="header"
       display="grid"
-      placeItems={{ base: "center", xl: "flex-start" }}
-      px={5}
-      pt={{ base: 5, xl: 10 }}
-      pb={10}
+      gridGap={4}
+      p={{ base: 4, lg: 8 }}
     >
-      <IconButton
-        variant="ghost"
-        size="lg"
-        aria-label="Toggle menu"
-        icon={<HiMenu />}
-        display={{ base: "flex", xl: "none" }}
-        justifySelf="flex-start"
-        _focus={{}}
-        onClick={toggleMenu}
-      />
+      <Stack direction="row" align="center" spacing={3}>
+        <IconButton
+          size="lg"
+          aria-label="Toggle menu"
+          icon={<HiMenu />}
+          display={{ base: "flex", xl: "none" }}
+          justifySelf="flex-start"
+          _focus={{}}
+          onClick={toggleMenu}
+        />
 
-      <Text my={2} fontSize="4xl" fontWeight="bold" textAlign="center">
+        <Text
+          display={{ xl: "none" }}
+          my={2}
+          fontSize={{ base: "xl", xl: "4xl" }}
+          fontWeight="bold"
+          textAlign="center"
+        >
+          {user?.displayName + "'s home"}
+        </Text>
+      </Stack>
+
+      <Text
+        display={{ base: "none", xl: "block" }}
+        my={2}
+        fontSize="4xl"
+        fontWeight="bold"
+        textAlign="center"
+      >
         {user?.displayName + "'s home"}
       </Text>
 
       {!device && (
-        <Button variant="smart" leftIcon={<FaPlus />} onClick={onOpen}>
+        <Button
+          variant="smart"
+          leftIcon={<FaPlus />}
+          justifySelf="center"
+          onClick={onOpen}
+        >
           Connect device
         </Button>
       )}

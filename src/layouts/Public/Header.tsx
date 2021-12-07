@@ -12,6 +12,7 @@ import {
   UnorderedList,
   useDisclosure,
 } from "@chakra-ui/react";
+import { CgLogIn } from "react-icons/cg";
 import { HiMenu } from "react-icons/hi";
 import { NavLink } from "react-router-dom";
 import { publicLinks } from "../../shared/other/links";
@@ -26,16 +27,15 @@ const Header = ({ toggleMenu }: { toggleMenu: () => void }) => {
     <Flex
       as="header"
       justify="space-between"
-      px={{ base: 2, lg: 8 }}
-      py={{ base: 4, lg: 8 }}
+      align="center"
+      p={{ base: 4, lg: 8 }}
     >
       <IconButton
-        variant="ghost"
         size="lg"
         aria-label="Toggle menu"
         icon={<HiMenu />}
         display={{ base: "flex", lg: "none" }}
-        mr={2}
+        mr={3}
         _focus={{}}
         onClick={toggleMenu}
       />
@@ -71,6 +71,16 @@ const Header = ({ toggleMenu }: { toggleMenu: () => void }) => {
           ))}
         </UnorderedList>
       </Box>
+
+      {!user && (
+        <IconButton
+          variant="smart"
+          aria-label="Login"
+          icon={<CgLogIn />}
+          display={{ base: "flex", lg: "none" }}
+          onClick={onOpen}
+        />
+      )}
 
       {!user && (
         <Button

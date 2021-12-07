@@ -1,6 +1,5 @@
 import About from "./pages/About";
 import Dashboard from "./pages/Dashboard";
-import Devices from "./pages/Devices";
 import Home from "./pages/Home";
 import Settings from "./pages/Settings";
 import theme from "./theme";
@@ -20,8 +19,6 @@ function App() {
             <Route path="/about" element={<About />}></Route>
 
             <Route path="/dashboard" element={<Dashboard />}></Route>
-
-            <Route path="/devices" element={<Devices />}></Route>
 
             <Route path="/settings" element={<Settings />}></Route>
           </Routes>

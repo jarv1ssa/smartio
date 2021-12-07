@@ -67,7 +67,7 @@ const Livingroom = () => {
             key={unit.key}
             justify="space-between"
             align="center"
-            p={5}
+            p={6}
             borderRadius="3xl"
             bgColor="gray.600"
           >
