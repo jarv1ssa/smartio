@@ -60,8 +60,9 @@ const Login = (props: Omit<ModalProps, "children">) => {
             }}
             validationSchema={LoginSchema}
             onSubmit={async ({ email, password }, { resetForm }) => {
+              setLoading(true);
+
               try {
-                setLoading(true);
                 await login!(email, password);
                 navigate("/dashboard");
               } catch (err) {

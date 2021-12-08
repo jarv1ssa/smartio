@@ -1,9 +1,13 @@
 import {
+  EmailAuthProvider,
   User,
   createUserWithEmailAndPassword,
+  deleteUser,
   onAuthStateChanged,
+  reauthenticateWithCredential,
   signInWithEmailAndPassword,
   updateProfile,
+  updatePassword,
 } from "@firebase/auth";
 import { auth } from "../firebase";
 import { createContext, useEffect, useState } from "react";
@@ -17,6 +21,9 @@ type AuthContextType = {
     password: string
   ) => Promise<void>;
   login: (email: string, password: string) => Promise<void>;
+  setProfile: (displayName?: string, photoURL?: string) => Promise<void>;
+  setPassword: (oldPassword: string, password: string) => Promise<void>;
+  deleteAccount: (password: string) => Promise<void>;
 };
 
 export const AuthContext = createContext<AuthContextType | null>(null);
@@ -58,6 +65,51 @@ export const AuthContextProvider = ({
     }
   };
 
+  const setProfile = async (displayName?: string, photoURL?: string) => {
+    try {
+      await updateProfile(auth.currentUser!, {
+        displayName,
+        photoURL,
+      });
+      setUser({
+        ...user!,
+        displayName: displayName || auth.currentUser?.displayName!,
+        photoURL: photoURL || auth.currentUser?.photoURL!,
+      });
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  const setPassword = async (oldPassword: string, password: string) => {
+    try {
+      const credential = EmailAuthProvider.credential(
+        auth.currentUser?.email!,
+        oldPassword
+      );
+
+      await reauthenticateWithCredential(auth.currentUser!, credential);
+      await updatePassword(auth.currentUser!, password);
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  const deleteAccount = async (password: string) => {
+    try {
+      const credential = EmailAuthProvider.credential(
+        auth.currentUser?.email!,
+        password
+      );
+
+      await reauthenticateWithCredential(auth.currentUser!, credential);
+      await deleteUser(auth.currentUser!);
+      setUser(null);
+    } catch (err) {
+      throw err;
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -65,6 +117,9 @@ export const AuthContextProvider = ({
         loading,
         signup,
         login,
+        setProfile,
+        setPassword,
+        deleteAccount,
       }}
     >
       {children}

@@ -16,7 +16,6 @@ import {
   ModalProps,
   useToast,
 } from "@chakra-ui/react";
-import { FaEnvelope, FaUser } from "react-icons/fa";
 import { Form, Formik } from "formik";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import { IoIosKeypad } from "react-icons/io";
@@ -24,22 +23,7 @@ import { useAuth } from "../../../hooks/useAuth";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 
-type SignupProps = {
-  email: string;
-  modalProps: Omit<ModalProps, "children">;
-};
-
-const SignupSchema = Yup.object().shape({
-  displayName: Yup.string()
-    .min(2, ({ min }) =>
-      min === 1
-        ? `Display name must be at least ${min} character`
-        : `Display name must be at least ${min} characters`
-    )
-    .required("Display name is a required field "),
-  email: Yup.string()
-    .email("Enter a valid email address")
-    .required("Email address is a required field"),
+const DeleteAccountSchema = Yup.object().shape({
   password: Yup.string()
     .min(6, ({ min }) =>
       min === 1
@@ -49,42 +33,37 @@ const SignupSchema = Yup.object().shape({
     .required("Password is a required field"),
 });
 
-const Signup = ({ email, modalProps }: SignupProps) => {
+const DeleteAccount = (props: Omit<ModalProps, "children">) => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const { signup } = useAuth();
+  const { deleteAccount } = useAuth();
   const navigate = useNavigate();
   const toast = useToast();
 
   return (
-    <Modal isCentered {...modalProps}>
+    <Modal isCentered {...props}>
       <ModalOverlay />
 
       <ModalContent>
-        <ModalHeader textAlign="center">Transaction succeeded!</ModalHeader>
+        <ModalHeader textAlign="center">Delete your account</ModalHeader>
 
         <ModalBody>
           <Formik
             initialValues={{
-              displayName: "",
-              email,
               password: "",
             }}
-            validationSchema={SignupSchema}
-            onSubmit={async (
-              { displayName, email, password },
-              { resetForm }
-            ) => {
+            validationSchema={DeleteAccountSchema}
+            onSubmit={async ({ password }, { resetForm }) => {
               setLoading(true);
 
               try {
-                await signup!(displayName, email, password);
-                navigate("/dashboard");
+                await deleteAccount!(password);
+                navigate("/");
               } catch (err) {
                 toast({
                   title: "Error",
-                  description: "An error occurred",
+                  description: "Invalid user credentials",
                   status: "error",
                   position: "top-right",
                   duration: 3000,
@@ -97,58 +76,7 @@ const Signup = ({ email, modalProps }: SignupProps) => {
             }}
           >
             {(props) => (
-              <Form id="login">
-                <FormControl
-                  mb={4}
-                  isInvalid={
-                    !!props.errors.displayName && props.touched.displayName
-                  }
-                >
-                  <InputGroup>
-                    <InputLeftElement
-                      pointerEvents="none"
-                      children={<FaUser />}
-                    />
-
-                    <Input
-                      name="displayName"
-                      placeholder="Display name"
-                      focusBorderColor="pink.500"
-                      value={props.values.displayName}
-                      onChange={props.handleChange}
-                      onBlur={props.handleBlur}
-                    />
-                  </InputGroup>
-
-                  <FormErrorMessage>
-                    {props.errors.displayName}
-                  </FormErrorMessage>
-                </FormControl>
-
-                <FormControl
-                  mb={4}
-                  isInvalid={!!props.errors.email && props.touched.email}
-                >
-                  <InputGroup>
-                    <InputLeftElement
-                      pointerEvents="none"
-                      children={<FaEnvelope />}
-                    />
-
-                    <Input
-                      type="email"
-                      name="email"
-                      placeholder="Email address"
-                      focusBorderColor="pink.500"
-                      value={props.values.email}
-                      onChange={props.handleChange}
-                      onBlur={props.handleBlur}
-                    />
-                  </InputGroup>
-
-                  <FormErrorMessage>{props.errors.email}</FormErrorMessage>
-                </FormControl>
-
+              <Form id="delete">
                 <FormControl
                   isInvalid={!!props.errors.password && props.touched.password}
                 >
@@ -186,7 +114,7 @@ const Signup = ({ email, modalProps }: SignupProps) => {
         <ModalFooter justifyContent="center">
           <Button
             type="submit"
-            form="login"
+            form="delete"
             variant="smart"
             isFullWidth
             isLoading={loading}
@@ -199,4 +127,4 @@ const Signup = ({ email, modalProps }: SignupProps) => {
   );
 };
 
-export default Signup;
+export default DeleteAccount;
