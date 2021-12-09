@@ -21,6 +21,8 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />}></Route>
 
             <Route path="/settings" element={<Settings />}></Route>
+
+            <Route path="*" element={<Home />} />
           </Routes>
         </ChakraProvider>
       </DeviceContextProvider>
