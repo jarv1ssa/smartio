@@ -78,8 +78,7 @@ const Aside = () => {
           <Image
             boxSize={16}
             src={forecast.forecastday[1].day.condition.icon}
-          ></Image>
-
+          />
           <Stack spacing={0} justify="center">
             <Text color="gray.400">Tomorrow</Text>
 
@@ -107,7 +106,7 @@ const Aside = () => {
           <Image
             boxSize={16}
             src={forecast.forecastday[2].day.condition.icon}
-          ></Image>
+          />
 
           <Stack spacing={0} justify="center">
             <Text color="gray.400">
@@ -156,21 +155,25 @@ const Aside = () => {
       <SimpleGrid columns={2} spacingY={5}>
         <Stack spacing={0}>
           <Text fontSize="xl">{current.temp_c + "°C"}</Text>
+
           <Text color="gray.400">Temperature</Text>
         </Stack>
 
         <Stack spacing={0}>
           <Text fontSize="xl">{current.feelslike_c + "°C"}</Text>
+
           <Text color="gray.400">Feels like</Text>
         </Stack>
 
         <Stack spacing={0}>
           <Text fontSize="xl">{current.humidity + "%"}</Text>
+
           <Text color="gray.400">Humidity</Text>
         </Stack>
 
         <Stack spacing={0}>
           <Text fontSize="xl">{current.wind_kph + " km/h"}</Text>
+          
           <Text color="gray.400">Wind</Text>
         </Stack>
       </SimpleGrid>

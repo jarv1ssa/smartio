@@ -9,7 +9,7 @@ const Dashboard = () => {
   return (
     <Private>
       <Tabs colorScheme="pink">
-        <TabList mx={8} flexDirection={{ base: "column", sm: "row" }}>
+        <TabList flexDirection={{ base: "column", sm: "row" }} mx={8}>
           <Tab _focus={{}}>Living room</Tab>
           <Tab _focus={{}}>Bedroom</Tab>
           <Tab _focus={{}}>Bathroom</Tab>

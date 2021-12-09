@@ -6,8 +6,8 @@ import {
   onAuthStateChanged,
   reauthenticateWithCredential,
   signInWithEmailAndPassword,
-  updateProfile,
   updatePassword,
+  updateProfile,
 } from "@firebase/auth";
 import { auth } from "../firebase";
 import { createContext, useEffect, useState } from "react";
@@ -50,6 +50,7 @@ export const AuthContextProvider = ({
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
       await updateProfile(res.user, { displayName });
+
       setUser(res.user);
     } catch (err) {
       throw err;
@@ -59,6 +60,7 @@ export const AuthContextProvider = ({
   const login = async (email: string, password: string) => {
     try {
       const res = await signInWithEmailAndPassword(auth, email, password);
+
       setUser(res.user);
     } catch (err) {
       throw err;
@@ -71,6 +73,7 @@ export const AuthContextProvider = ({
         displayName,
         photoURL,
       });
+
       setUser({
         ...user!,
         displayName: displayName || auth.currentUser?.displayName!,
@@ -104,6 +107,7 @@ export const AuthContextProvider = ({
 
       await reauthenticateWithCredential(auth.currentUser!, credential);
       await deleteUser(auth.currentUser!);
+
       setUser(null);
     } catch (err) {
       throw err;

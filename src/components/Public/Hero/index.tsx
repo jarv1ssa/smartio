@@ -43,8 +43,8 @@ const Hero = () => {
           </Heading>
 
           <Text color="gray.400">
-            Track your home's energy usage, temperature, and security with our
-            state-of-the art smart devices.
+            Control your smart home from everywhere with our state-of-the-art
+            smart devices and application.
           </Text>
         </Stack>
 
@@ -93,7 +93,7 @@ const Hero = () => {
         )}
 
         {user && (
-          <Button variant="smart" onClick={() => navigate("/dashboard ")}>
+          <Button variant="smart" onClick={() => navigate("/dashboard")}>
             Go Home
           </Button>
         )}

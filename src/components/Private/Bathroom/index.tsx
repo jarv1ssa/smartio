@@ -38,6 +38,7 @@ const Bathroom = () => {
 
               <Stack>
                 <Text fontWeight="bold">{unit.name}</Text>
+                
                 <Text>
                   {data?.units.bathroom[unit.key]
                     ? "Connected"

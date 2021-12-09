@@ -1,4 +1,6 @@
 import * as Yup from "yup";
+import ChangePassword from "../ChangePassword";
+import DeleteAccount from "../DeleteAccount";
 import {
   Box,
   Button,
@@ -18,11 +20,9 @@ import {
 import { FaEnvelope, FaUser } from "react-icons/fa";
 import { Form, Formik } from "formik";
 import { Fragment, useState } from "react";
-import { useAuth } from "../../../hooks/useAuth";
-import DeleteAccount from "../DeleteAccount";
 import { IoIosKeypad } from "react-icons/io";
 import { MdEdit } from "react-icons/md";
-import ChangePassword from "../ChangePassword";
+import { useAuth } from "../../../hooks/useAuth";
 
 const AccountSchema = Yup.object().shape({
   displayName: Yup.string()
@@ -185,6 +185,7 @@ const Account = () => {
           <Text fontSize="lg" fontWeight="bold">
             Delete account
           </Text>
+
           <Text color="gray.300" textAlign="justify">
             By deleting your account, you will lose all your data.
           </Text>
@@ -207,8 +208,8 @@ const Account = () => {
         </Button>
       </Flex>
 
-      <DeleteAccount isOpen={isOpen} onClose={onClose} />
-      <ChangePassword isOpen={isOpen2} onClose={onClose2} />
+      <ChangePassword isOpen={isOpen} onClose={onClose} />
+      <DeleteAccount isOpen={isOpen2} onClose={onClose2} />
     </Fragment>
   );
 };

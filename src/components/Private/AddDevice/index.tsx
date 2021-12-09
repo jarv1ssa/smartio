@@ -17,8 +17,8 @@ import {
 } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import { MdDevices } from "react-icons/md";
-import { useState } from "react";
 import { useDevice } from "../../../hooks/useDevice";
+import { useState } from "react";
 
 const DeviceSchema = Yup.object().shape({
   name: Yup.string()
@@ -51,6 +51,7 @@ const AddDevice = (props: Omit<ModalProps, "children">) => {
             validationSchema={DeviceSchema}
             onSubmit={async ({ name }) => {
               setLoading(true);
+
               connect!(name);
 
               toast({

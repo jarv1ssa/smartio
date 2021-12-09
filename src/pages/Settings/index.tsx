@@ -1,12 +1,12 @@
+import Account from "../../components/Private/Account";
 import Private from "../../layouts/Private";
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/tabs";
-import Account from "../../components/Private/Account";
 
 const Settings = () => {
   return (
     <Private>
       <Tabs colorScheme="pink">
-        <TabList mx={8} flexDirection={{ base: "column", sm: "row" }}>
+        <TabList flexDirection={{ base: "column", sm: "row" }} mx={8}>
           <Tab _focus={{}}>Account</Tab>
         </TabList>
 

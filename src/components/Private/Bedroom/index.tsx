@@ -35,6 +35,7 @@ const Bedroom = () => {
       <Flex justify="space-between" align="center">
         <Stack direction="row" align="center">
           <Icon as={MdOutlineCameraIndoor} boxSize={8} />
+
           <Text fontSize="lg">Bedroom camera</Text>
         </Stack>
 
@@ -74,6 +75,7 @@ const Bedroom = () => {
 
               <Stack>
                 <Text fontWeight="bold">{unit.name}</Text>
+                
                 <Text>
                   {data?.units.bedroom[unit.key]
                     ? "Connected"
