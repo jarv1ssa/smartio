@@ -14,15 +14,15 @@ function App() {
       <DeviceContextProvider>
         <ChakraProvider theme={theme}>
           <Routes>
-            <Route path="/" element={<Home />}></Route>
+            <Route path="/" element={<Home />} />
 
-            <Route path="/about" element={<About />}></Route>
+            <Route path="/about" element={<About />} />
 
-            <Route path="/dashboard" element={<Dashboard />}></Route>
+            <Route path="/dashboard" element={<Dashboard />} />
 
-            <Route path="/settings" element={<Settings />}></Route>
+            <Route path="/settings" element={<Settings />} />
 
-            <Route path="*" element={<Home />} />
+            <Route path="*" element={<Home />}></Route>
           </Routes>
         </ChakraProvider>
       </DeviceContextProvider>
