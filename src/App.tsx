@@ -22,7 +22,7 @@ function App() {
 
             <Route path="/settings" element={<Settings />} />
 
-            <Route path="*" element={<Home />}></Route>
+            <Route path="*" element={<Home />} />
           </Routes>
         </ChakraProvider>
       </DeviceContextProvider>
