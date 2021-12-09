@@ -57,5 +57,6 @@
   },
   "devDependencies": {
     "@types/uuid": "^8.3.3"
-  }
+  },
+  "homepage": "https://smartio-1331.ew.r.appspot.com/"
 }
