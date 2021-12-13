@@ -164,7 +164,7 @@ const Account = () => {
                 aria-label="Change password"
                 icon={<MdEdit />}
                 _focus={{}}
-                onClick={onOpen2}
+                onClick={onOpen}
               />
             }
           />
@@ -191,7 +191,7 @@ const Account = () => {
           </Text>
         </Box>
 
-        <Button _focus={{}} onClick={onOpen}>
+        <Button _focus={{}} onClick={onOpen2}>
           Delete account
         </Button>
       </Flex>
