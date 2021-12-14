@@ -155,7 +155,6 @@ const ChangePassword = (props: Omit<ModalProps, "children">) => {
                 </FormControl>
 
                 <FormControl
-                  mb={4}
                   isInvalid={
                     !!props.errors.passwordConfirmation &&
                     props.touched.passwordConfirmation
